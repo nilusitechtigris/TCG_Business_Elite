@@ -1,124 +1,165 @@
 import Link from 'next/link';
 import { AttributionTracker } from '@/components/attribution';
 import { CardFront } from '@/components/card-visual';
-import { GuidedCollectionPath } from '@/components/guided-path';
 import { SiteFooter, SiteHeader } from '@/components/site-chrome';
 import { cards, youtubeContent } from '@/lib/data';
 
 const featured = cards[0];
+const featuredVideo = youtubeContent.find((video) => video.youtubeId === featured.videoIds[0]) ?? youtubeContent[0];
 
 export default function Home() {
   return (
-    <main>
+    <main className="ux-home">
       <AttributionTracker />
       <SiteHeader />
 
-      <section className="collectr-hero">
-        <div className="collectr-glow collectr-glow-one" />
-        <div className="collectr-glow collectr-glow-two" />
-        <div className="collectr-copy">
-          <p className="product-kicker"><span>●</span> The companion to TCG Business Elite Shorts</p>
-          <h1>Know the story<br />behind <i>every card.</i></h1>
-          <p>Continue beyond the Short with connected card records, visible verification status and collector education—built around evidence, not hype.</p>
-          <div className="collectr-actions">
-            <Link className="app-button" href="/szoboszlai?utm_source=website&utm_medium=homepage&utm_campaign=szoboszlai_collection">Explore the collection <span>→</span></Link>
-            <a className="app-button secondary" href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer" data-track="youtube_return"><span className="mini-play">▶</span> Watch on YouTube <i>↗</i></a>
+      <section className="ux-hero">
+        <div className="ux-hero-copy">
+          <p className="ux-kicker"><span aria-hidden="true">▶</span> Featured in a TCG Business Elite Short</p>
+          <h1>See the card.<br /><i>Understand the story.</i></h1>
+          <p className="ux-lead">
+            Start with the exact card from the video, then explore its identity, condition and collector context at your own pace.
+          </p>
+          <div className="ux-actions">
+            <Link className="ux-button primary" href={`/${featuredVideo.landingPageSlug}`}>
+              Open the featured card <span aria-hidden="true">→</span>
+            </Link>
+            <Link className="ux-button secondary" href="/szoboszlai">
+              Browse the collection
+            </Link>
           </div>
-          <div className="hero-microproof"><span><i>✓</i> Card-specific landings</span><span><i>✓</i> Privacy-first video</span><span><i>✓</i> Honest confidence</span></div>
+          <p className="ux-value-note"><span aria-hidden="true">✓</span> Full card record first. No registration required.</p>
         </div>
 
-        <div className="product-stage" aria-label="TCG Business Elite collection dashboard preview">
-          <span className="float-chip chip-top"><i>✓</i> Record verified</span>
-          <span className="float-chip chip-side">▶ Featured in Short</span>
-          <div className="dashboard-shell">
-            <div className="dashboard-topbar"><div><span className="dash-logo">BE</span><b>Collection pulse</b></div><span className="live-pill"><i /> LIVE ARCHIVE</span></div>
-            <div className="dashboard-tabs"><b>Overview</b><span>Shorts</span><span>Evidence</span></div>
-            <div className="dashboard-main-stat"><small>Documented collection</small><strong>03 <em>cards</em></strong><p><span>↑</span> 3 connected YouTube Shorts</p></div>
-            <div className="signal-chart" aria-hidden="true"><span /><span /><span /><span /><span /><span /><span /></div>
-            <div className="dashboard-records">
-              <div className="record-row"><span className="record-thumb" style={{ backgroundImage: `url('${cards[0].image}')` }} /><p><b>Future Stars · PSA 10</b><small>Identity verified</small></p><strong>High</strong></div>
-              <div className="record-row"><span className="record-thumb" style={{ backgroundImage: `url('${cards[1].image}')` }} /><p><b>Chrome · Blue parallel</b><small>Checklist review pending</small></p><strong>Open</strong></div>
-            </div>
-          </div>
-          <div className="stage-card"><CardFront card={featured} /></div>
-          <div className="confidence-float"><small>Market confidence</small><b>Insufficient data</b><span><i /></span><p>We wait for evidence.</p></div>
+        <div className="ux-featured">
+          <div className="ux-card-wrap"><CardFront card={featured} /></div>
+          <article className="ux-card-summary">
+            <p>Featured record</p>
+            <h2>{featured.title}</h2>
+            <dl>
+              <div><dt>Set</dt><dd>{featured.year} {featured.set}</dd></div>
+              <div><dt>Condition</dt><dd>{featured.condition}</dd></div>
+              <div><dt>Record</dt><dd>{featured.recordId}</dd></div>
+            </dl>
+            <Link href={`/cards/${featured.slug}`}>View the complete record <span aria-hidden="true">→</span></Link>
+          </article>
         </div>
       </section>
 
-      <section className="proof-strip">
-        <div><strong>03</strong><span>Documented records</span><small>Identity and condition</small></div>
-        <div><strong>03</strong><span>Connected Shorts</span><small>Real video IDs</small></div>
-        <div><strong>00</strong><span>Unverified price claims</span><small>Evidence before estimate</small></div>
-        <div><strong>100%</strong><span>Source-led</span><small>Context over hype</small></div>
+      <section className="ux-trust" aria-label="What to expect">
+        <div><span aria-hidden="true">✓</span><p><strong>No signup wall</strong><small>Explore before you commit</small></p></div>
+        <div><span aria-hidden="true">▶</span><p><strong>Video loads by choice</strong><small>Privacy-conscious playback</small></p></div>
+        <div><span aria-hidden="true">◎</span><p><strong>Honest verification</strong><small>Unknown details stay marked</small></p></div>
       </section>
 
-      <GuidedCollectionPath />
+      <section className="ux-start content-section" aria-labelledby="start-heading">
+        <div className="ux-section-head">
+          <div><p className="ux-kicker dark">Choose your starting point</p><h2 id="start-heading">What would you like to do?</h2></div>
+          <p>Pick the path that matches why you are here. You can switch paths at any time.</p>
+        </div>
+        <div className="ux-start-grid">
+          <Link className="ux-start-card recommended" href="/youtube">
+            <span className="ux-badge">Recommended</span>
+            <i aria-hidden="true">▶</i>
+            <p>Continue from YouTube</p>
+            <h3>Find the card from a Short.</h3>
+            <small>See every connected video and its exact next step.</small>
+            <b>View featured Shorts <span aria-hidden="true">→</span></b>
+          </Link>
+          <Link className="ux-start-card" href="/szoboszlai">
+            <i aria-hidden="true">▦</i>
+            <p>Browse the collection</p>
+            <h3>Explore every documented card.</h3>
+            <small>Open clear records for set, parallel and condition details.</small>
+            <b>Open the collection <span aria-hidden="true">→</span></b>
+          </Link>
+          <Link className="ux-start-card" href="/learn">
+            <i aria-hidden="true">?</i>
+            <p>Learn the basics</p>
+            <h3>Understand collector terms.</h3>
+            <small>Use plain-language explanations grounded in real cards.</small>
+            <b>Open the glossary <span aria-hidden="true">→</span></b>
+          </Link>
+        </div>
+      </section>
 
-      <section className="feature-hub">
+      <section className="ux-flow">
         <div className="content-section">
-          <p className="product-kicker dark"><span>●</span> One place, the whole story</p>
-          <div className="hub-heading"><h2>Everything your<br /><i>collection needs.</i></h2><p>Each feature is designed to answer the next useful question after a viewer discovers a card on YouTube.</p></div>
-          <div className="bento-grid">
-            <Link className="bento-card bento-large" href={`/cards/${featured.slug}`}>
-              <div className="bento-icon">↗</div><span>Connected records</span><h3>Land on the exact card.</h3><p>Front, back, set, parallel, condition and verification status are visible without hunting.</p>
-              <div className="mini-record-stack">
-                {cards.slice(0,3).map((card, index) => <span key={card.slug} style={{ backgroundImage: `url('${card.image}')`, transform: `translateX(${index * 70}px) rotate(${index * 3 - 3}deg)` }} />)}
+          <div className="ux-section-head light">
+            <div><p className="ux-kicker">A simple viewer journey</p><h2>From Short to full context.</h2></div>
+            <p>Each step answers the next natural question without sending you through a generic link page.</p>
+          </div>
+          <div className="ux-flow-grid">
+            <article><span>01</span><i aria-hidden="true">▶</i><h3>Watch</h3><p>A card catches your attention in a YouTube Short.</p></article>
+            <article><span>02</span><i aria-hidden="true">⌁</i><h3>Identify</h3><p>The video leads directly to that card’s record.</p></article>
+            <article><span>03</span><i aria-hidden="true">◎</i><h3>Understand</h3><p>Check the set, condition and verification status.</p></article>
+            <article><span>04</span><i aria-hidden="true">↗</i><h3>Explore</h3><p>Continue to related cards, videos and learning guides.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="ux-collection content-section" aria-labelledby="collection-heading">
+        <div className="ux-section-head">
+          <div><p className="ux-kicker dark">The documented collection</p><h2 id="collection-heading">Start with a real card.</h2></div>
+          <Link href="/szoboszlai">View the full collection <span aria-hidden="true">→</span></Link>
+        </div>
+        <div className="ux-card-grid">
+          {cards.map((card) => (
+            <Link className="ux-collection-card" href={`/cards/${card.slug}`} key={card.slug}>
+              <div className="ux-collection-image" style={{ backgroundImage: `url('${card.image}')` }}>
+                <span>{card.recordId}</span>
               </div>
+              <p>{card.year}</p>
+              <h3>{card.title}</h3>
+              <small>{card.condition}</small>
+              <b>Open card record <span aria-hidden="true">→</span></b>
             </Link>
-            <Link className="bento-card bento-video" href="/youtube">
-              <div className="bento-icon play">▶</div><span>Featured on YouTube</span><h3>The Short stays connected.</h3><p>Continue the exact story with a privacy-conscious video preview.</p>
-              <div className="bento-video-thumb" style={{ backgroundImage: `url('${youtubeContent[1].thumbnail}')` }}><b>CLICK TO LOAD</b></div>
-            </Link>
-            <Link className="bento-card" href="/learn">
-              <div className="bento-icon">?</div><span>Collector education</span><h3>Learn the language.</h3><p>Parallel, insert, serial number and condition—explained with cards from the collection.</p><em>Open the glossary →</em>
-            </Link>
-            <Link className="bento-card" href="/insights">
-              <div className="bento-icon">⌁</div><span>Market confidence</span><h3>Evidence beside the number.</h3><p>Every market observation carries its source and confidence. Missing data stays honest.</p><em>See the method →</em>
-            </Link>
-            <Link className="bento-card bento-wide" href="/szoboszlai">
-              <div><div className="bento-icon">▦</div><span>Collection discovery</span><h3>Explore card by card.</h3><p>Filter the archive for cards that appeared in videos, then move naturally into related records and sets.</p><em>Browse Szoboszlai →</em></div>
-              <div className="collection-preview">
-                {cards.map((card) => <span key={card.slug} style={{ backgroundImage: `url('${card.image}')` }}><i>▶</i><b>{card.recordId}</b></span>)}
+          ))}
+        </div>
+      </section>
+
+      <section className="ux-knowledge">
+        <div className="content-section ux-knowledge-grid">
+          <Link href="/learn" className="ux-knowledge-card">
+            <span>Collector education</span>
+            <h2>Not sure what “parallel” or “graded” means?</h2>
+            <p>Learn the terminology with short, readable explanations and examples from the collection.</p>
+            <b>Visit the glossary <span aria-hidden="true">→</span></b>
+          </Link>
+          <Link href="/insights" className="ux-knowledge-card accent">
+            <span>Evidence and confidence</span>
+            <h2>Know what is verified—and what is still unknown.</h2>
+            <p>Prices and claims never appear without context. When the evidence is incomplete, the site says so.</p>
+            <b>See the method <span aria-hidden="true">→</span></b>
+          </Link>
+        </div>
+      </section>
+
+      <section className="ux-shorts content-section" aria-labelledby="shorts-heading">
+        <div className="ux-section-head">
+          <div><p className="ux-kicker dark">Connected to the channel</p><h2 id="shorts-heading">Continue from a Short.</h2></div>
+          <a href="https://www.youtube.com/@TCGBusinessElite/shorts" target="_blank" rel="noreferrer" data-track="youtube_return">Watch on YouTube <span aria-label="opens in a new tab">↗</span></a>
+        </div>
+        <div className="ux-shorts-grid">
+          {youtubeContent.map((video, index) => (
+            <Link href={`/${video.landingPageSlug}`} className="ux-short" key={video.youtubeId}>
+              <div className="ux-short-image" style={{ backgroundImage: `url('${video.thumbnail}')` }}>
+                <span>0{index + 1}</span><i aria-hidden="true">▶</i>
               </div>
+              <p>YouTube Short</p>
+              <h3>{video.title}</h3>
+              <b>Continue the story <span aria-hidden="true">→</span></b>
             </Link>
-          </div>
+          ))}
         </div>
       </section>
 
-      <div className="brand-ribbon"><span>CARDS</span><i>✦</i><span>SHORTS</span><i>✦</i><span>CONTEXT</span><i>✦</i><span>EVIDENCE</span><i>✦</i><span>COLLECTION</span></div>
-
-      <section className="channel-showcase">
-        <div className="content-section">
-          <div className="hub-heading light"><div><p className="product-kicker"><span>●</span> Live from the channel</p><h2>Every Short gets<br /><i>a useful next step.</i></h2></div><a href="https://www.youtube.com/@TCGBusinessElite/shorts" target="_blank" rel="noreferrer" data-track="youtube_return">View all Shorts ↗</a></div>
-          <div className="new-shorts-grid">
-            {youtubeContent.map((video, index) => (
-              <Link href={`/${video.landingPageSlug}`} className="new-short" key={video.youtubeId}>
-                <div className="new-short-image" style={{ backgroundImage: `url('${video.thumbnail}')` }}><span>0{index + 1}</span><i>▶</i><b>CONNECTED</b></div>
-                <small>SHORT · {video.ctaVersion.replace('-', ' ')}</small><h3>{video.title}</h3><p>Continue the story <span>→</span></p>
-              </Link>
-            ))}
-          </div>
-        </div>
+      <section className="ux-final">
+        <p>Ready to explore?</p>
+        <h2>See the Szoboszlai collection, card by card.</h2>
+        <Link className="ux-button dark" href="/szoboszlai">Open the collection <span aria-hidden="true">→</span></Link>
       </section>
 
-      <section className="journey-panel">
-        <div className="content-section">
-          <p className="product-kicker dark"><span>●</span> Built for the viewer journey</p>
-          <div className="hub-heading"><h2>One Short.<br /><i>One clear path.</i></h2><p>No generic link dump. Every campaign can continue with the card and terminology the viewer already recognizes.</p></div>
-          <div className="new-journey-grid">
-            <div><span>01</span><b>Watch</b><p>A card catches your eye in a TCG Business Elite Short.</p></div><i>→</i>
-            <div><span>02</span><b>Identify</b><p>A memorable URL lands on that exact card record.</p></div><i>→</i>
-            <div><span>03</span><b>Understand</b><p>Inspect identity, condition and confidence without friction.</p></div><i>→</i>
-            <div><span>04</span><b>Explore</b><p>Move into related cards, sets and collector education.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="new-final-cta">
-        <div className="cta-orbit"><span>BE</span></div>
-        <p>Start with the player at the heart of the collection.</p><h2>Explore Szoboszlai,<br /><i>card by card.</i></h2>
-        <Link className="app-button dark" href="/szoboszlai">Open the collection <span>→</span></Link>
-      </section>
       <SiteFooter />
     </main>
   );
