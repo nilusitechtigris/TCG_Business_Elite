@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { AttributionTracker } from '@/components/attribution';
 import { CardFront } from '@/components/card-visual';
+import { GuidedCollectionPath } from '@/components/guided-path';
 import { SiteFooter, SiteHeader } from '@/components/site-chrome';
 import { cards, youtubeContent } from '@/lib/data';
 
@@ -50,6 +51,8 @@ export default function Home() {
         <div><strong>00</strong><span>Unverified price claims</span><small>Evidence before estimate</small></div>
         <div><strong>100%</strong><span>Source-led</span><small>Context over hype</small></div>
       </section>
+
+      <GuidedCollectionPath />
 
       <section className="feature-hub">
         <div className="content-section">
