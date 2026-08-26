@@ -15,8 +15,8 @@ export function SiteHeader() {
       <Brand />
       <nav className="main-nav" aria-label="Primary navigation">
         <Link href="/szoboszlai">Collection</Link>
-        <Link href="/insights">Insights</Link>
-        <Link href="/learn">Learn</Link>
+        <Link href="/prices">Investment</Link>
+        <Link href="/youtube">Videos</Link>
       </nav>
       <a
         className="youtube-link"
@@ -40,15 +40,14 @@ export function SiteFooter() {
         <p>Documenting the details, context and evidence behind a focused football-card collection.</p>
       </div>
       <div className="footer-links">
-        <span>Explore</span>
+        <span>Collection</span>
         <Link href="/szoboszlai">Szoboszlai collection</Link>
-        <Link href="/youtube">Featured on YouTube</Link>
-        <Link href="/learn">Collector glossary</Link>
+        <Link href="/prices">Investment tracking</Link>
       </div>
       <div className="footer-links">
-        <span>Follow</span>
+        <span>Content</span>
+        <Link href="/youtube">Connected videos</Link>
         <a href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer" data-track="youtube_return">YouTube ↗</a>
-        <Link href="/insights">Campaign insights</Link>
       </div>
       <div className="footer-bottom">
         <p>Independent collection documentation. No affiliation with any player, club, league, manufacturer or grading company.</p>

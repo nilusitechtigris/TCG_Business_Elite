@@ -7,7 +7,7 @@ import { youtubeContent } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Featured on YouTube | TCG Business Elite',
-  description: 'Continue from TCG Business Elite Shorts to the exact cards, records and collector guides featured in each video.',
+  description: 'Continue from TCG Business Elite Shorts to the exact cards, collection records and market tracking featured in each video.',
 };
 
 export default function YouTubePage() {
@@ -18,7 +18,7 @@ export default function YouTubePage() {
       <section className="editorial-hero">
         <p className="eyebrow"><span /> Channel companion</p>
         <h1>From 30 seconds<br /><i>to the full record.</i></h1>
-        <p>Choose the Short you came from. Each landing page reconnects you with the featured card before offering context, education or more of the collection.</p>
+        <p>Choose the Short you came from. Each landing page reconnects you with the featured card, its collection record and available market evidence.</p>
         <a className="button-primary youtube-button" href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer" data-track="youtube_return"><span>▶</span> Visit TCG Business Elite <i>↗</i></a>
       </section>
 

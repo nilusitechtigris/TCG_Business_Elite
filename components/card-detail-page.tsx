@@ -31,7 +31,7 @@ export function CardDetailPage({ card, sourceVideo }: { card: CardRecord; source
             {relatedVideo && (
               <a className="button-primary youtube-button" href={`https://www.youtube.com/shorts/${relatedVideo.youtubeId}`} target="_blank" rel="noreferrer" data-track="youtube_return"><span>▶</span> Watch this card’s Short <i>↗</i></a>
             )}
-            <Link className="button-ghost" href="/szoboszlai">Explore related cards <span>→</span></Link>
+            <Link className="button-ghost" href="/prices">Investment tracker <span>→</span></Link>
           </div>
           <div className="record-code"><span>Collection record</span><b>{card.recordId}</b><em>Published</em></div>
         </div>
@@ -51,28 +51,12 @@ export function CardDetailPage({ card, sourceVideo }: { card: CardRecord; source
         <div><span>Last record review</span><b>25 Aug 2026</b></div>
       </section>
 
-      <section className="story-section content-section">
-        <div className="story-intro">
-          <span>01 · The card</span>
-          <h2>What makes this<br /><i>one different?</i></h2>
-        </div>
-        <div className="story-body">
-          <p className="lead">This record separates the physical card from assumptions around it: the set and card number identify the release, the insert names its checklist family, and the condition describes this exact copy.</p>
-          <div className="term-grid">
-            <div><span>Term 01</span><h3>{card.insert}</h3><p>An insert is a distinct subset within a broader release. It usually has its own design and checklist.</p></div>
-            <div><span>Term 02</span><h3>{card.parallel}</h3><p>A parallel uses the same underlying card but changes the finish or color. Serial numbering must be verified on the physical card.</p></div>
-            <div><span>Term 03</span><h3>{card.condition}</h3><p>Condition belongs to this copy, not the release in general. Graded and raw cards should never be compared as if identical.</p></div>
-          </div>
-          <Link className="text-link" href="/learn">Open the complete beginner’s guide →</Link>
-        </div>
-      </section>
-
       <section className="market-section">
-        <div className="market-head"><span>02 · Market history</span><h2>Evidence before <i>estimate.</i></h2></div>
+        <div className="market-head"><span>01 · Investment history</span><h2>Evidence before estimate.</h2></div>
         {card.priceHistory.length === 0 ? (
           <div className="empty-market">
             <div className="empty-signal"><span /><span /><span /><span /><span /></div>
-            <div><b>No verified sales attached—yet.</b><p>Rather than display an unverified price, this record stays useful through identity, condition and collection context. Confirmed comparable sales can be added with date, source and confidence.</p></div>
+            <div><b>No verified sales attached—yet.</b><p>Rather than display an unverified price, this record stays useful through identity, condition and collection context. Confirmed comparable sales can be added with date, source and confidence.</p><Link className="text-link" href="/prices">Open the collection price tracker →</Link></div>
             <aside><span>Confidence</span><strong>Insufficient data</strong><small>0 confirmed comparable sales</small></aside>
           </div>
         ) : null}
@@ -82,7 +66,7 @@ export function CardDetailPage({ card, sourceVideo }: { card: CardRecord; source
 
       {relatedVideo && (
         <section className="video-section content-section">
-          <div className="video-copy"><span>03 · Source Short</span><h2>See the card<br /><i>in the video.</i></h2><p>The preview is local. YouTube is contacted only if you choose to play it.</p></div>
+          <div className="video-copy"><span>02 · Source Short</span><h2>See the card in the video.</h2><p>The preview is local. YouTube is contacted only if you choose to play it.</p></div>
           <PrivacyVideo video={relatedVideo} />
         </section>
       )}

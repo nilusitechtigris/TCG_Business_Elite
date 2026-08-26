@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const templates = [
   { letter: 'A', name: 'Card showcase', hook: 'Do you know what makes this Szoboszlai card different?', body: 'Show the card, manufacturer, set, parallel and one distinguishing feature.', cta: 'See the front, back, complete details and available price history through the first link on my channel profile.' },
   { letter: 'B', name: 'Price-history story', hook: 'How has this Szoboszlai card’s market changed?', body: 'Explain one confirmed market observation without presenting it as a guaranteed valuation.', cta: 'See the complete timeline, sources and confidence level on the website through my profile.' },
-  { letter: 'C', name: 'Education', hook: 'What does a numbered football card actually mean?', body: 'Give a concise explanation using a card from the collection.', cta: 'The complete beginner’s guide and examples are available through the first profile link.' },
+  { letter: 'C', name: 'Investment record', hook: 'What evidence supports this card’s market history?', body: 'Show the acquisition record, the closest verified comparable sale and the confidence level.', cta: 'See the evidence-backed investment record through the first link on my channel profile.' },
   { letter: 'D', name: 'Collection discovery', hook: 'Card number {number} in my Szoboszlai collection.', body: 'Highlight why the card was added and what makes it interesting.', cta: 'Explore the full Szoboszlai collection through the link on my channel profile.' },
 ];
 

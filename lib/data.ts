@@ -40,7 +40,7 @@ export type YouTubeContent = {
   associatedArticle: string;
   landingPageSlug: string;
   campaignId: string;
-  ctaVersion: 'card-showcase' | 'price-history' | 'education' | 'collection-discovery';
+  ctaVersion: 'card-showcase' | 'price-history' | 'investment-record' | 'collection-discovery';
   visibility: Visibility;
 };
 

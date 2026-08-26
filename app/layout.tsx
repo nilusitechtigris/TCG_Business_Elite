@@ -5,19 +5,19 @@ const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
-  title: 'TCG Business Elite — The story behind every card',
-  description: 'Explore the cards featured on TCG Business Elite, with verified details, condition notes and source-led market history.',
+  title: 'My Szoboszlai Collection | TCG Business Elite',
+  description: 'Track the Szoboszlai card collection, connect every record to its related videos, and organize acquisition costs and market evidence.',
   icons: { icon: '/og.png' },
   openGraph: {
     title: 'TCG Business Elite',
-    description: 'The story behind every card—complete collection records, connected Shorts and source-led market context.',
+    description: 'A personal Szoboszlai card collection archive with connected Shorts and evidence-led investment tracking.',
     type: 'website',
     images: [{ url: '/og.png', width: 1536, height: 1024, alt: 'TCG Business Elite — The story behind every card' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'TCG Business Elite',
-    description: 'The story behind every card.',
+    description: 'Track the cards. Connect the stories.',
     images: ['/og.png'],
   },
 };

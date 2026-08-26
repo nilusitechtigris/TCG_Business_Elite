@@ -10,7 +10,7 @@ export type FunnelEventName =
   | 'engaged_visit'
   | 'card_view'
   | 'collection_view'
-  | 'education_view'
+  | 'investment_view'
   | 'youtube_return';
 
 type FunnelEvent = {
@@ -35,7 +35,7 @@ function readEvents(): FunnelEvent[] {
 function pageEvent(pathname: string): FunnelEventName {
   if (pathname.startsWith('/cards/') || pathname.startsWith('/shorts/')) return 'card_view';
   if (pathname.startsWith('/szoboszlai') || pathname.startsWith('/sets/')) return 'collection_view';
-  if (pathname.startsWith('/learn')) return 'education_view';
+  if (pathname.startsWith('/prices')) return 'investment_view';
   return 'landing_view';
 }
 
@@ -91,7 +91,7 @@ const funnelStages: { event: FunnelEventName; label: string; note: string }[] = 
   { event: 'engaged_visit', label: 'Engaged visits', note: '12+ seconds on page' },
   { event: 'card_view', label: 'Card interactions', note: 'Card or Short detail views' },
   { event: 'collection_view', label: 'Collection exploration', note: 'Collection and set views' },
-  { event: 'education_view', label: 'Education visits', note: 'Glossary or guide views' },
+  { event: 'investment_view', label: 'Investment visits', note: 'Price and evidence tracking views' },
   { event: 'youtube_return', label: 'YouTube return clicks', note: 'Outbound channel or Short clicks' },
 ];
 
