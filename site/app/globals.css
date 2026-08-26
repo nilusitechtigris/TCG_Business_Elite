@@ -176,8 +176,9 @@ h1 em, h2 em {
 .nav-shell nav a:hover,
 .nav-shell nav a:focus-visible { color: var(--paper); background: rgba(255, 255, 255, .06); }
 
+.nav-right { justify-self: end; display: flex; align-items: center; gap: 10px; }
+
 .nav-action {
-  justify-self: end;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1838,7 +1839,8 @@ h1 em, h2 em {
 
 @media (max-width: 900px) {
   .nav-shell { grid-template-columns: 1fr auto; }
-  .nav-shell nav { display: none; }
+  .nav-shell > nav { display: none; }
+  .mobile-nav { display: block; }
   .hero { grid-template-columns: 1fr; padding-top: 44px; }
   .hero-inspector { width: min(100%, 520px); margin-top: 8px; }
   .section-heading, .home-collection-head, .explorer-head, .detail-section-head, .page-hero { grid-template-columns: 1fr; }
@@ -2105,4 +2107,105 @@ h1 em, h2 em {
   .verify-links { grid-template-columns: 1fr; }
   .verify-head { grid-template-columns: 1fr; }
   .verify-head h3 { white-space: normal; }
+}
+
+/* ─── Mobile menu ────────────────────────────────────────────── */
+
+/* Hidden until the breakpoint where the inline nav is dropped. */
+.mobile-nav { display: none; position: relative; }
+
+.menu-toggle {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .05);
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--paper);
+  transition: transform .25s cubic-bezier(.2, .8, .3, 1), opacity .2s ease;
+}
+
+.menu-toggle.open { border-color: var(--line-gold); background: rgba(240, 197, 66, .12); }
+.menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  width: max(232px, 62vw);
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  /* Solid, not translucent: the hero headline behind it is high-contrast
+     and showed through a 97% alpha panel. */
+  background: #0b1018;
+  box-shadow: var(--shadow-lg);
+  animation: menu-drop .2s cubic-bezier(.2, .8, .3, 1);
+}
+
+/* `hidden` must win over the display above. */
+.mobile-panel[hidden] { display: none; }
+
+@keyframes menu-drop { from { opacity: 0; transform: translateY(-8px); } }
+
+.mobile-panel nav { display: flex; flex-direction: column; gap: 2px; }
+
+.mobile-panel nav a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  transition: background .18s ease, color .18s ease;
+}
+
+.mobile-panel nav a span { color: var(--muted-2); font-family: var(--body); font-size: 15px; }
+.mobile-panel nav a:hover, .mobile-panel nav a:focus-visible { background: rgba(255, 255, 255, .07); color: var(--gold); }
+.mobile-panel nav a:hover span { color: var(--gold); }
+
+.mobile-subscribe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  background: var(--grad-red);
+  color: #fff;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* The header CTA duplicates the one inside the panel on the smallest screens. */
+@media (max-width: 560px) {
+  .nav-shell .nav-action { display: none; }
+}
+
+/* Must come after `.mobile-nav { display: none }` above: a media query adds no
+   specificity, so the later rule would otherwise win and hide the toggle. */
+@media (max-width: 900px) {
+  .mobile-nav { display: block; }
 }

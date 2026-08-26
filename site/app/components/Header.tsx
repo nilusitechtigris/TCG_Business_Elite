@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MobileMenu } from './MobileMenu';
 
 export function Header() {
   return (
@@ -12,9 +13,12 @@ export function Header() {
         <Link href="/szoboszlai">Collection</Link>
         <Link href="/youtube">YouTube</Link>
       </nav>
-      <a className="nav-action" data-track="youtube-return-click" href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer">
-        <span aria-hidden="true">▶</span> Subscribe
-      </a>
+      <div className="nav-right">
+        <a className="nav-action" data-track="youtube-return-click" href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer noopener">
+          <span aria-hidden="true">▶</span> Subscribe
+        </a>
+        <MobileMenu />
+      </div>
     </header>
   );
 }
