@@ -5,6 +5,7 @@ import { DataChart } from '../../components/DataChart';
 import { Footer, Header } from '../../components/Header';
 import { cardBySlug, cardImage, cardSrcSet, cards, setSlug } from '../../data';
 import { money, valueCard } from '../../valuation';
+import { ebayActiveSearch, ebayBroadSearch, ebaySoldSearch, psaCertUrl } from '../../verify';
 
 export function generateStaticParams() { return cards.map((card) => ({ slug: card.slug })); }
 
@@ -21,6 +22,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
   if (!card) notFound();
   const related = cards.filter((item) => item.id !== card.id && item.set === card.set).slice(0, 3);
   const valuation = valueCard(card);
+  const certUrl = psaCertUrl(card);
   return <main><Header />
     <div className="breadcrumbs"><a href="/szoboszlai">Collection</a><span>/</span><a href={`/sets/${setSlug(card.set)}`}>{card.set}</a><span>/</span><b>{card.serial ?? card.cardNumber ?? card.id}</b></div>
     <section className="card-detail-hero">
@@ -51,7 +53,31 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
           <p className="proof-warning"><b>Not market evidence.</b> {card.comparableSales.length === 0 ? 'No comparable sale has been recorded for this card. Treat the figure as a starting point for research, not a price.' : `Backed by ${card.comparableSales.length} recorded sale(s).`}</p>
         </article>
       </div>
-      <div className="evidence-grid"><article><span>Comparable sales</span><strong>{card.comparableSales.length === 0 ? 'No confirmed records' : `${card.comparableSales.length} confirmed`}</strong><p>Add a sale date, price, currency, venue, condition match and source URL before it affects confidence.</p></article><article><span>Valuation source</span><strong>{card.valuationSource ?? 'TBE internal model'}</strong><p>No third-party estimate, dealer quote or price-guide figure has been supplied for this card.</p></article><article><span>Photography record</span><strong>Verified pair · High confidence</strong><p>Front and back match by capture order, design and visible identifiers. Documented 26 Aug 2026.</p></article></div>
+      <section className="verify-strip" aria-labelledby="verify-title">
+        <div className="verify-head">
+          <h3 id="verify-title">Check it yourself</h3>
+          <p>These are searches and lookups, not confirmations. eBay shows what comparable cards actually sold for; PSA confirms the slab and its grade. Nothing here is recorded as evidence until a specific sale is entered.</p>
+        </div>
+        <div className="verify-links">
+          <a className="verify-link primary" href={ebaySoldSearch(card)} target="_blank" rel="noreferrer noopener" data-track="verify-ebay-sold">
+            <b>Sold listings on eBay</b><span>What this card has actually gone for</span><em aria-hidden="true">↗</em>
+          </a>
+          <a className="verify-link" href={ebayActiveSearch(card)} target="_blank" rel="noreferrer noopener" data-track="verify-ebay-active">
+            <b>Current listings</b><span>What sellers are asking today</span><em aria-hidden="true">↗</em>
+          </a>
+          {certUrl ? (
+            <a className="verify-link" href={certUrl} target="_blank" rel="noreferrer noopener" data-track="verify-psa-cert">
+              <b>PSA certificate {card.certification}</b><span>Confirm the slab and its {card.grade} grade</span><em aria-hidden="true">↗</em>
+            </a>
+          ) : (
+            <div className="verify-link disabled">
+              <b>PSA certificate</b><span>{card.gradingCompany ? 'Certification number not recorded yet' : 'Raw card — nothing to verify'}</span><em aria-hidden="true">—</em>
+            </div>
+          )}
+        </div>
+        <p className="verify-note">Searching for <code>{card.year} {card.set} {card.parallel}</code>{card.serial ? <> · <code>{card.serial}</code></> : null}. If a search returns nothing, <a href={ebayBroadSearch(card)} target="_blank" rel="noreferrer noopener">widen it to the whole set</a>.</p>
+      </section>
+      <div className="evidence-grid"><article><span>Comparable sales</span><strong>{card.comparableSales.length === 0 ? 'No confirmed records' : `${card.comparableSales.length} confirmed`}</strong><p>Add a sale date, price, currency, venue, condition match and source URL before it affects confidence.</p><a className="text-link" href={ebaySoldSearch(card)} target="_blank" rel="noreferrer noopener" data-track="verify-ebay-sold">Find sold comps <span aria-hidden="true">↗</span></a></article><article><span>Valuation source</span><strong>{card.valuationSource ?? 'TBE internal model'}</strong><p>No third-party estimate, dealer quote or price-guide figure has been supplied for this card.</p></article><article><span>Photography record</span><strong>Verified pair · High confidence</strong><p>Front and back match by capture order, design and visible identifiers. Documented 26 Aug 2026.</p></article></div>
     </section>
     <section className="youtube-card-link"><div><span className="youtube-play" aria-hidden="true">▶</span><div><p className="eyebrow">YouTube connection</p><h2>No linked video yet.</h2><p>A card may connect to multiple Shorts once IDs and associations are confirmed.</p></div></div><a className="button-primary" data-track="youtube-return-click" href="https://www.youtube.com/@TCGBusinessElite" target="_blank" rel="noreferrer">Watch on YouTube <span>↗</span></a></section>
     {related.length ? <section className="related-cards"><div className="detail-section-head"><div><p className="eyebrow"><span /> Same set</p><h2>Related cards.</h2></div><a className="text-link" href={`/sets/${setSlug(card.set)}`}>View complete set →</a></div><div className="related-row">{related.map((item) => <a href={`/cards/${item.slug}`} key={item.id}><img src={cardImage(item, 'front', 480)} srcSet={cardSrcSet(item, 'front')} sizes="(max-width: 700px) 78vw, 30vw" alt={`Front of ${item.parallel} card`} loading="lazy" /><span>{item.parallel}</span><strong>{item.serial ?? item.cardNumber ?? 'Not confirmed'}</strong></a>)}</div></section> : null}
