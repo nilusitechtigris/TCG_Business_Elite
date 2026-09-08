@@ -10,7 +10,7 @@ export function generateStaticParams() { return sets.map((set) => ({ setSlug: se
 export async function generateMetadata({ params }: { params: Promise<{ setSlug: string }> }): Promise<Metadata> {
   const slug = (await params).setSlug;
   const set = sets.find((item) => setSlug(item) === slug);
-  return set ? { title: `${set} | TCG Business Elite`, description: `Owned ${set} cards in the TCG Business Elite collection.` } : { title: 'Set not found | TCG Business Elite' };
+  return set ? { title: `${set} | TCG Business Elite`, description: `Owned ${set} cards in the TCG Business Elite collection.`, alternates: { canonical: `/sets/${slug}` } } : { title: 'Set not found | TCG Business Elite' };
 }
 
 export default async function SetPage({ params }: { params: Promise<{ setSlug: string }> }) {

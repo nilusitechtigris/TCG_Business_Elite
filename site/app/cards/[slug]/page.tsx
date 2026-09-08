@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!card) return { title: 'Card not found | TCG Business Elite', openGraph: { images: [] }, twitter: { images: [] } };
   const title = `${card.year} ${card.set} ${card.serial ?? card.cardNumber ?? ''} | TCG Business Elite`;
   const description = `${card.player} · ${card.parallel}. View verified front/back photography and market-data confidence.`;
-  return { title, description, openGraph: { title, description, images: [{ url: cardImage(card, 'front', 1920), alt: `Front of ${card.player}'s ${card.set} card` }] }, twitter: { card: 'summary_large_image', title, description, images: [cardImage(card, 'front', 1920)] } };
+  return { title, description, alternates: { canonical: `/cards/${card.slug}` }, openGraph: { title, description, images: [{ url: cardImage(card, 'front', 1920), alt: `Front of ${card.player}'s ${card.set} card` }] }, twitter: { card: 'summary_large_image', title, description, images: [cardImage(card, 'front', 1920)] } };
 }
 
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {

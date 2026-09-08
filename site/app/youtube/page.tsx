@@ -3,7 +3,11 @@ import { CardInspector } from '../components/CardInspector';
 import { Footer, Header } from '../components/Header';
 import { cards } from '../data';
 
-export const metadata = { title: 'YouTube Companion | TCG Business Elite', description: 'The campaign bridge from TCG Business Elite videos and Shorts to individual collection cards.' };
+export const metadata = {
+  title: 'YouTube Companion | TCG Business Elite',
+  description: 'The campaign bridge from TCG Business Elite videos and Shorts to individual collection cards.',
+  alternates: { canonical: '/youtube' },
+};
 
 export default function YouTubePage() {
   const card = cards[0];

@@ -4,7 +4,11 @@ import { Footer, Header } from '../components/Header';
 import { cards } from '../data';
 import { money, valuePortfolio } from '../valuation';
 
-export const metadata = { title: 'Portfolio | TCG Business Elite', description: 'Collection-level cost basis, estimated market value, confidence and historical performance for TCG Business Elite.' };
+export const metadata = {
+  title: 'Portfolio | TCG Business Elite',
+  description: 'Collection-level cost basis, estimated market value, confidence and historical performance for TCG Business Elite.',
+  alternates: { canonical: '/portfolio' },
+};
 
 export default function PortfolioPage() {
   const portfolio = valuePortfolio(cards);

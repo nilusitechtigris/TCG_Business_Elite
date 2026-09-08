@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import { CardInspector } from './components/CardInspector';
 import { DataChart } from './components/DataChart';
 import { Footer, Header, Ticker } from './components/Header';
 import { cardImage, cardSrcSet, cards } from './data';
 import { money, valuePortfolio } from './valuation';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default function Home() {
   const featured = cards[0];

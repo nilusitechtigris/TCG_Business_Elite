@@ -2,7 +2,11 @@ import { CollectionExplorer } from '../components/CollectionExplorer';
 import { Footer, Header } from '../components/Header';
 import { cards } from '../data';
 
-export const metadata = { title: 'Dominik Szoboszlai Collection | TCG Business Elite', description: 'Explore 22 owned Dominik Szoboszlai cards with verified front and back photography.' };
+export const metadata = {
+  title: 'Dominik Szoboszlai Collection | TCG Business Elite',
+  description: 'Explore 22 owned Dominik Szoboszlai cards with verified front and back photography.',
+  alternates: { canonical: '/szoboszlai' },
+};
 
 export default function CollectionPage() {
   return <main><Header />

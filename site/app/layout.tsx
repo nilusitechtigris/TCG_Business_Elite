@@ -4,7 +4,6 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tcgbusinesselite.com'),
-  alternates: { canonical: '/' },
   title: 'TCG Business Elite | Collection Value Tracker',
   description: 'A documented Dominik Szoboszlai football-card collection with transparent market-value tracking and source confidence.',
   openGraph: {
